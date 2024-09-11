@@ -7,7 +7,7 @@
         <parameter name="browserType" value="chrome"></parameter>
 
         <classes>
-            <class name="runner.ParallelRunnerAll"></class>
+            <class name="runners.ParallelRunnerAll"></class>
         </classes>
     </test>
 
@@ -15,7 +15,7 @@
         <parameter name="browserType" value="edge"></parameter>
 
         <classes>
-            <class name="runner.ParallelRunnerAll"></class>
+            <class name="runners.ParallelRunnerAll"></class>
         </classes>
     </test>
 
@@ -23,7 +23,7 @@
         <parameter name="browserType" value="firefox"></parameter>
 
         <classes>
-            <class name="runner.ParallelRunnerAll"></class>
+            <class name="runners.ParallelRunnerAll"></class>
         </classes>
     </test>
 
