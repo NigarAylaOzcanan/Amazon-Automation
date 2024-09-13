@@ -16,7 +16,7 @@ import utilities.GWD;
                 "rerun:TestOutput/failed_scenario.txt",
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
         dryRun = false,
-        monochrome = true
+        monochrome = false
 )
 
 public class ParallelRunnerAll extends AbstractTestNGCucumberTests {

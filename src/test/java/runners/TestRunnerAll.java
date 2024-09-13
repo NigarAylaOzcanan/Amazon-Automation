@@ -13,7 +13,7 @@ import io.cucumber.testng.CucumberOptions;
                 "rerun:TestOutput/failed_scenario.txt",
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
         dryRun = false,
-        monochrome = true
+        monochrome = false
 )
 public class TestRunnerAll extends AbstractTestNGCucumberTests {
 }
