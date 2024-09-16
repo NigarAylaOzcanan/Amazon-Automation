@@ -24,6 +24,6 @@ public class LoginSteps {
 
     @Then("User should be logged in successfully")
     public void userShouldBeLoggedInSuccessfully() {
-        login.verifyContainsText(login.accountName, "onur");
+        login.verifyContainsText(login.accountName,ConfigReader.getProperty("name"));
     }
 }
