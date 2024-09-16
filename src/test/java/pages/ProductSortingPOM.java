@@ -31,4 +31,19 @@ public class ProductSortingPOM extends ReusableMethods {
 
     @FindBy(css = "[aria-label*='4.0 GHz'] i")
     public WebElement Ghz4SelectBtn;
+
+    public WebElement getWebElement(String strElement){
+        switch (strElement){
+            case "computerBtn" : return this.computerBtn;
+            case "laptopBtn" : return this.laptopBtn;
+            case "gamingLaptops" : return this.gamingLaptops;
+            case "MsiSelectBtn" : return this.MsiSelectBtn;
+            case "CpuIntelSelectBtn" : return this.CpuIntelSelectBtn;
+            case "Corei7SelectBtn" : return this.Corei7SelectBtn;
+            case "Ghz4SelectBtn" : return this.Ghz4SelectBtn;
+
+        }
+
+        return null;
+    }
 }
