@@ -232,9 +232,9 @@ public class ReusableMethods {
         return element.getAttribute(attribute);
     }
 
-    public void loadingBarWait(WebElement element) {
-        wait.until(ExpectedConditions.attributeToBe(element, "style", "height: 2px;"));
-    }
+   // public void loadingBarWait(WebElement element) {
+   //     wait.until(ExpectedConditions.attributeToBe(element, "style", "height: 2px;"));
+   // }
 
     public static void switchToParentFrame() {
         GWD.getDriver().switchTo().parentFrame();
@@ -267,7 +267,7 @@ public class ReusableMethods {
         }
     }
 
-    public static boolean listContainsString(java.util.List<WebElement> list, String search) {
+    public static boolean listContainsString(List<WebElement> list, String search) {
         boolean isFound = false;
         for (WebElement e : list) {
             if (e.getText().equalsIgnoreCase(search))
@@ -276,7 +276,7 @@ public class ReusableMethods {
         return isFound;
     }
 
-    public static boolean compareLists(java.util.List<WebElement> list1, java.util.List<String> list2) {
+    public static boolean compareLists(List<WebElement> list1, List<String> list2) {
         // Check if the lists are of equal size.
         if (list1.size() != list2.size()) {
             return false;
@@ -319,7 +319,6 @@ public class ReusableMethods {
         }
     }
 
-    //Alert ACCEPT
     public static void alertAccept(int timeout) {
         WebDriverWait wait = new WebDriverWait(GWD.getDriver(), Duration.ofSeconds(timeout));
         wait.until(ExpectedConditions.alertIsPresent());
