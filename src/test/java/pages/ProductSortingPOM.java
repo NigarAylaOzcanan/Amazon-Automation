@@ -13,7 +13,7 @@ public class ProductSortingPOM extends ReusableMethods {
         PageFactory.initElements(GWD.getDriver(), this);
     }
 
-    @FindBy(css = "[id='nav-xshop-container']>div>:nth-child(5)")
+    @FindBy(xpath = "//*[text()='Bilgisayar']")
     public WebElement computerBtn;
 
     @FindBy(css = "[id='nav-subnav']>a:nth-child(3)")
