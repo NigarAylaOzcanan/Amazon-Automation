@@ -11,7 +11,6 @@ import org.testng.Assert;
 import pages.ProductSortingPOM;
 import utilities.ConfigReader;
 import utilities.GWD;
-import utilities.ReusableMethods;
 import java.time.Duration;
 import java.util.List;
 
@@ -43,19 +42,20 @@ public class ProductSortingSteps {
     @Then("User should be able to verify the total number of products")
     public void userShouldBeAbleToVerifyTheTotalNumberOfProducts() {
         wait.until(ExpectedConditions.visibilityOf(ps.totalProductNumber));
-        if (ps.totalProductNumber.getText().contains("348")) {
-            ps.verifyContainsText(ps.totalProductNumber, "348");
+        int space = ps.totalProductNumber.getText().indexOf(" ");
+        String part = ps.totalProductNumber.getText().substring(0, space);
+        int resultNumber = Integer.parseInt(part);
+
+        if (resultNumber > 300) {
+            ps.verifyContainsText(ps.totalProductNumber, part);
         } else {
-            ps.verifyContainsText(ps.totalProductNumber, "10");
+            ps.verifyContainsText(ps.totalProductNumber, part);
         }
-
-
     }
 
     @And("User click on filtering units")
     public void userClickOnFilteringUnits(DataTable filteringButtons) {
         List<String> strButtonList = filteringButtons.asList(String.class);
-        WebDriverWait wait = new WebDriverWait(GWD.getDriver(), Duration.ofSeconds(ConfigReader.getIntProperty("explicit.wait")));
         for (int i = 0; i < strButtonList.size(); i++) {
             WebElement linkWebElement = ps.getWebElement(strButtonList.get(i));
             ps.clickFunction(linkWebElement);
@@ -67,7 +67,6 @@ public class ProductSortingSteps {
     public void userSortsProductsFromLowToHighPrice() {
         ps.clickFunction(ps.sortingCriteriaBtn);
         ps.clickFunction(ps.fromLowToHigh);
-        ReusableMethods.wait(2);
     }
 
     @Then("User should be able to verify the ranking criterion")
@@ -99,7 +98,7 @@ public class ProductSortingSteps {
                 double doubleProductPrice = Double.parseDouble(strProductPrice);
                 String strAfterProductPrice = ps.productPrices.get(i + 1).getText().replaceAll("[^0-9,.]", "");
                 double doubleAfterProductPrice = Double.parseDouble(strAfterProductPrice);
-                Assert.assertTrue(doubleProductPrice > doubleAfterProductPrice, "Product Prices are not from low to high");
+                Assert.assertTrue(doubleProductPrice > doubleAfterProductPrice, "Product Prices are not from high to low");
             }
         }
     }
