@@ -25,4 +25,7 @@ public class CustomerSupportPOM extends ReusableMethods {
 
     @FindBy(css = "[class='fs-heading']")
     public WebElement pageTitle;
+
+    @FindBy(css = "[class='sic-container']>h1")
+    public WebElement someOtherTopicText;
 }
