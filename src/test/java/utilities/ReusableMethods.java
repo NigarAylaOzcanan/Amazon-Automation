@@ -44,7 +44,7 @@ public class ReusableMethods {
      *                This element should be visible and clickable.
      * @throws Exception If the element is not clickable after both attempts.
      */
-    public void clickWithFallBack(WebElement element) {
+    public void safeClick(WebElement element) {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(element));
             scrollToElement(element);
