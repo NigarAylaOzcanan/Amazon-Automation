@@ -50,9 +50,12 @@ public class SavedPaymentMethodsPOM extends ReusableMethods {
     @FindBy(xpath = "//*[text()='Düzenle']")
     public WebElement editBtn;
 
-    @FindBy(xpath = "(//*[@class='apx-remove-link-button'])[2]")
+    @FindBy(css = "[class='apx-remove-link-button']")
     public WebElement deleteCardBtn;
 
-    @FindBy(xpath = "(//*[text()='Kaldır'])[12]")
+    @FindBy(xpath = "//*[text()='Kaldır']")
     public WebElement removeBtn;
+
+    @FindBy(css = "[name*='CancelAddCreditCardEvent']")
+    public WebElement cancelBtn;
 }
