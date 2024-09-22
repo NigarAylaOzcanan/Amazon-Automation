@@ -40,7 +40,7 @@ public class SearchSteps {
     public void clickSearchWithoutKeyword() {
     }
 
-    @Then("the user should be redirected back to the amazon home page")
+    @Then("the user should be redirected back to the Amazon home page")
     public void verifyRedirectToHomePage() {
     }
 }
