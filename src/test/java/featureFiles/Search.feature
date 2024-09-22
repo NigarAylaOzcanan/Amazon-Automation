@@ -10,26 +10,26 @@ Feature: Search Functionality
     Then User should be logged in successfully
 
   Scenario: Search for the product by keyword
-    Given User is on the Amazon home page
-    When User enters "laptop" in the search bar
-    And User clicks on the search button
-    Then User should see a list of products related to the keyword
+    Given the user is on the Amazon home page
+    When the user enters "laptop" in the search bar
+    And the user clicks on the search button
+    Then the user should see a list of products related to the keyword
 
   Scenario: Navigate to the product page from search results
-    Given User enters "laptop" in the search bar
-    When User clicks on the search button
-    And User clicks on the first product in the search results
-    Then User should be taken to the product's detail page
-    And  User should see the product details including name, price, and description
+    Given the user enters "laptop" in the search bar
+    When the user clicks on the search button
+    And the user clicks on the first product in the search results
+    Then the user should be taken to the product's detail page
+    And  the user should see the product details including name, price, and description
 
   Scenario: Search for a product that does not exist
-    Given User is on the Amazon home page
-    When User enters "xyz2345bcd" in the search bar
-    And User clicks on the search button
-    Then User should see a message indicating that no products were found
+    Given the user is on the Amazon home page
+    When the user enters "xyz2345bcd" in the search bar
+    And the user clicks on the search button
+    Then the user should see a message indicating that no products were found
 
   Scenario: Search without entering a keyword
-    Given User is on the Amazon home page
-    When User clicks on the search button without entering a keyword
-    Then User should be redirected back to the amazon home page
+    Given the user is on the Amazon home page
+    When the user clicks on the search button without entering a keyword
+    Then the user should be redirected back to the amazon home page
 
