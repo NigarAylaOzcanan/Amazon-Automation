@@ -17,8 +17,8 @@ Feature: Checkout Process Functionality
     When The user clicks complete shopping
     And The user clicks continue to the payment step
     And The user clicks to add credit card or bank card
+    When The user enters card details
     And The user clicks on save or not save credit card details for the next purchase
-    When The user adds the correct card details and then click Add to your card
     Then The user should be able to see the message that the card information has not been saved
     When The user clicks  on use this payment tool
     And The user clicks on use this address
