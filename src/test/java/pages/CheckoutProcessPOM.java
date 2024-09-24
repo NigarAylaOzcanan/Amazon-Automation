@@ -72,4 +72,10 @@ public class CheckoutProcessPOM extends ReusableMethods {
 
     @FindBy(css = "[class='a-popover-content'] a")
     public WebElement backToCart;
+
+    @FindBy(css = "[class='a-dropdown-prompt']")
+    public List<WebElement> productQuantity;
+
+    @FindBy(xpath = "(//*[text()='Sayfada Kal'])[2]")
+    public WebElement stayPage;
 }
