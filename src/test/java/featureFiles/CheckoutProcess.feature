@@ -15,7 +15,6 @@ Feature: Checkout Process Functionality
     And The user goes to cart
     Then The user should be able to control products in the cart
     When The user clicks complete shopping
-    And The user clicks continue to the payment step
     And The user clicks to add credit card or bank card
     When The user enters card details
     And The user clicks on save or not save credit card details for the next purchase

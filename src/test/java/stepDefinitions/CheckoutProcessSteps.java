@@ -4,6 +4,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -13,7 +14,10 @@ import utilities.ConfigReader;
 import utilities.GWD;
 import utilities.ReusableMethods;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.Duration;
+import java.util.Objects;
 
 public class CheckoutProcessSteps {
 
@@ -35,7 +39,6 @@ public class CheckoutProcessSteps {
     @And("The user adds the products to buy in the cart")
     public void theUserAddsTheProductsToBuyInTheCart() {
         for (int i = 0; i < 3; i++) {
-
             cp.jsClick(cp.addToCardBtn.get(i));
             ReusableMethods.wait(2);
         }
@@ -50,17 +53,32 @@ public class CheckoutProcessSteps {
     public void theUserShouldBeAbleToControlProductsInTheCart() {
 
         double subTotal = 0;
+        int step = 2;
+
         for (int i = 0; i < cp.productPrice.size(); i++) {
             String strProductPrice = cp.productPrice.get(i).getText().replaceAll("[^0-9,.-]", "");
             strProductPrice = strProductPrice.replace(",", ".");
             double doubleProductPrice = Double.parseDouble(strProductPrice);
-            subTotal = doubleProductPrice + subTotal;
+            double doubleProductQuantity = Double.parseDouble(cp.productQuantity.get(i).getText());
 
+            if (doubleProductQuantity == 0) {
+                subTotal = 0;
+            }
+
+            subTotal = (doubleProductPrice * doubleProductQuantity) + subTotal;
         }
+
+        BigDecimal bdSubTotal = new BigDecimal(subTotal);
+        bdSubTotal = bdSubTotal.setScale(step, RoundingMode.HALF_UP);
+
         String strSubTotal = cp.subTotal.getText().replaceAll("[^0-9,.-]", "");
         strSubTotal = strSubTotal.replace(",", ".");
         doubleSubTotal = Double.parseDouble(strSubTotal);
-        Assert.assertEquals(doubleSubTotal, subTotal, "The sum of product prices is not " +
+
+        BigDecimal bdResultSubTotal = new BigDecimal(doubleSubTotal);
+        bdResultSubTotal = bdResultSubTotal.setScale(step, RoundingMode.HALF_UP);
+
+        Assert.assertEquals(bdResultSubTotal, bdSubTotal, "The sum of product prices is not " +
                 " the same as the intermediate total price");
     }
 
@@ -69,16 +87,23 @@ public class CheckoutProcessSteps {
         cp.clickFunction(cp.proceedToCheckout);
     }
 
-    @And("The user clicks continue to the payment step")
-    public void theUserClicksContinueToThePaymentStep() {
-        cp.clickFunction(cp.continueToPaymentStp);
-    }
-
     @And("The user clicks to add credit card or bank card")
     public void theUserClicksToAddCreditCardOrBankCard() {
-        cp.waitUntilVisibilityOf(cp.addCreditOrBankCard);
-        wait.until(ExpectedConditions.textToBePresentInElement(cp.addCreditOrBankCard, "Kredi kartı veya banka kartı ekleyin"));
-        cp.jsClick(cp.addCreditOrBankCard);
+        if (!Objects.equals(ReusableMethods.getCurrentURL(), "https://www.amazon.com.tr/gp/buy/payselect/handlers/display.html?_from=cheetah")) {
+            cp.clickFunction(cp.continueToPaymentStp);
+            wait.until(driver -> driver.findElement(By.xpath("//a[text()='Kredi kartı veya banka kartı ekleyin']")).getText().contains("banka kartı"));
+            cp.waitUntilElementToBeClickable(cp.amazonLogo);
+            cp.jsClick(cp.amazonLogo);
+            cp.jsClick(cp.stayPage);
+            cp.clickFunction(cp.addCreditOrBankCard);
+        } else {
+            wait.until(driver -> driver.findElement(By.xpath("//a[text()='Kredi kartı veya banka kartı ekleyin']")).getText().contains("banka kartı"));
+            cp.waitUntilElementToBeClickable(cp.amazonLogo);
+            cp.jsClick(cp.amazonLogo);
+            cp.jsClick(cp.stayPage);
+            cp.clickFunction(cp.addCreditOrBankCard);
+        }
+
     }
 
     @When("The user enters card details")
