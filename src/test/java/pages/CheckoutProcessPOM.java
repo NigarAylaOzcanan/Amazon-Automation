@@ -78,4 +78,7 @@ public class CheckoutProcessPOM extends ReusableMethods {
 
     @FindBy(xpath = "(//*[text()='Sayfada Kal'])[2]")
     public WebElement stayPage;
+
+    @FindBy(xpath ="(//div[@aria-live='polite'])[2]")
+    public WebElement waitAddCartButton;
 }

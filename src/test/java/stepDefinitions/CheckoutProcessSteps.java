@@ -1,9 +1,6 @@
 package stepDefinitions;
 
-import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
+import io.cucumber.java.en.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -38,9 +35,9 @@ public class CheckoutProcessSteps {
 
     @And("The user adds the products to buy in the cart")
     public void theUserAddsTheProductsToBuyInTheCart() {
-        for (int i = 0; i < 3; i++) {
-            cp.jsClick(cp.addToCardBtn.get(i));
-            ReusableMethods.wait(2);
+        for (int i = 2; i >= 0; i--) {
+            cp.clickFunction(cp.addToCardBtn.get(i));
+            wait.until(ExpectedConditions.attributeToBe(cp.waitAddCartButton, "style", "display: none;"));
         }
     }
 
