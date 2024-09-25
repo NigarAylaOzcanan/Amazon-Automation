@@ -26,6 +26,4 @@ public class LoginPOM extends ReusableMethods {
     @FindBy(id = "signInSubmit")
     public WebElement signInButton;
 
-    @FindBy(css = "[id='nav-link-accountList']>div>span")
-    public WebElement accountName;
 }

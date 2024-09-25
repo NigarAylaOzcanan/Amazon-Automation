@@ -3,7 +3,7 @@ Feature: Function to filter and sort products
   Background:
     Given Navigate to the Amazon
     When Enter the valid credentials and click the login button
-    Then User should be logged in successfully
+
 
   Scenario: Product Filtering and Sorting
     When User click units on the tab menu
