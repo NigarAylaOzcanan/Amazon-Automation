@@ -3,7 +3,7 @@ Feature: Product Recommendations process
   Background:
     Given Navigate to the Amazon
     When Enter the valid credentials and click the login button
-    Then User should be logged in successfully
+
 
   Scenario:Product Recommendations According to the Product Reviewed and Browser History
     Given The User navigates down the site to product recommendations

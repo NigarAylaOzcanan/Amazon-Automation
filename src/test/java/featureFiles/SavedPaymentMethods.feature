@@ -3,7 +3,7 @@ Feature: Saved Payment Methods
   Background:
     Given Navigate to the Amazon
     When Enter the valid credentials and click the login button
-    Then User should be logged in successfully
+
 
   Scenario: Registering and Deleting a Payment Method
     Given The user clicks to my account

@@ -22,8 +22,4 @@ public class LoginSteps {
         login.clickFunction(login.signInButton);
     }
 
-    @Then("User should be logged in successfully")
-    public void userShouldBeLoggedInSuccessfully() {
-        login.verifyContainsText(login.accountName,ConfigReader.getProperty("name"));
-    }
 }

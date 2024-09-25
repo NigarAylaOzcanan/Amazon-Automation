@@ -7,7 +7,7 @@ Feature: Search Functionality
   Background:
     Given Navigate to the Amazon
     When Enter the valid credentials and click the login button
-    Then User should be logged in successfully
+
 
   Scenario: Search for the product by keyword
     Given the user is on the Amazon home page

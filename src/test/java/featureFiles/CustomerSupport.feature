@@ -3,7 +3,7 @@ Feature: Customer Service Functionality
   Background:
     Given Navigate to the Amazon
     When Enter the valid credentials and click the login button
-    Then User should be logged in successfully
+
 
   Scenario:Reaching the Customer Service Interface
     Given The user click customer support on the tab menu

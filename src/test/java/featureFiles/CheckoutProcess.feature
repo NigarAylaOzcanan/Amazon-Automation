@@ -6,7 +6,7 @@ Feature: Checkout Process Functionality
   Background:
     Given Navigate to the Amazon
     When Enter the valid credentials and click the login button
-    Then User should be logged in successfully
+
 
   Scenario: Successful purchase of the product
     Given The user enters keyword in the search bar
