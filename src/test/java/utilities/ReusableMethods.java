@@ -352,6 +352,20 @@ public class ReusableMethods {
             robot.keyRelease(KeyEvent.VK_TAB);
         }
     }
+    public static void downKeyMultiplePress(int quantity) {
+        Robot robot;
+        try {
+            robot = new Robot();
+        } catch (AWTException e) {
+            throw new RuntimeException(e);
+        }
+
+        for (int i = 0; i < quantity; i++) {
+            robot.delay(500);
+            robot.keyPress(KeyEvent.VK_DOWN);
+            robot.keyRelease(KeyEvent.VK_DOWN);
+        }
+    }
 
     /**
      * Simulates pressing the Enter key multiple times using a Robot object.
