@@ -14,4 +14,5 @@ Feature: Wishlist Check Functionality
 
   Scenario: Remove products from the wish list
     Given The user clicks the wishlist that is in the submenu of the account
+    When The user removes products from the wishlist
     Then The user should be able to verify that the wishlist is empty
