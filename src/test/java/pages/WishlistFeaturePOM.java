@@ -24,7 +24,7 @@ public class WishlistFeaturePOM extends ReusableMethods {
     @FindBy(css = "[class='a-size-base-plus a-color-base a-text-normal']")
     public List<WebElement> productList;
 
-    @FindBy(id = "span#productTitle")
+    @FindBy(css = "span[id='productTitle']")
     public WebElement productTitle;
 
     @FindBy(css = "[id='huc-view-your-list-button'] a")
