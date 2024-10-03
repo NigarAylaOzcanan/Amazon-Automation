@@ -3,15 +3,16 @@ package stepDefinitions;
 import io.cucumber.java.en.*;
 import org.testng.Assert;
 import pages.ProductRecommendationsPOM;
+import utilities.GWD;
 import utilities.ReusableMethods;
 
-public class ProductRecommendationsSteps {
+public class ProductRecommendationsSteps extends ReusableMethods {
 
     ProductRecommendationsPOM pr = new ProductRecommendationsPOM();
 
     @Given("The User navigates down the site to product recommendations")
     public void theUserNavigatesDownTheSiteToProductRecommendations() {
-        ReusableMethods.scrollToElement(pr.backToTop);
+       pr.scrollToElement(pr.backToTop);
     }
 
     @When("The User clicks on see viewing history button")
@@ -26,7 +27,7 @@ public class ProductRecommendationsSteps {
 
     @And("The User clicks on any product in the product list based on purchases")
     public void theUserClicksOnAnyProductInTheProductListBasedOnPurchases() {
-        pr.clickFunction(pr.viewedProducts.get(ReusableMethods.randomGenerator(pr.viewedProducts.size() - 1)));
+        pr.clickFunction(pr.viewedProducts.get(randomGenerator(pr.viewedProducts.size() - 1)));
     }
 
     @Then("The user should be able to verify that they can navigate to the product page")

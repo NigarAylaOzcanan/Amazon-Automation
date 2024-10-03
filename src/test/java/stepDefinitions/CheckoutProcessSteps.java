@@ -16,7 +16,7 @@ import java.math.RoundingMode;
 import java.time.Duration;
 import java.util.Objects;
 
-public class CheckoutProcessSteps {
+public class CheckoutProcessSteps extends ReusableMethods {
 
     CheckoutProcessPOM cp = new CheckoutProcessPOM();
     SavedPaymentMethodsPOM sp = new SavedPaymentMethodsPOM();
@@ -86,7 +86,7 @@ public class CheckoutProcessSteps {
 
     @And("The user clicks to add credit card or bank card")
     public void theUserClicksToAddCreditCardOrBankCard() {
-        if (!Objects.equals(ReusableMethods.getCurrentURL(), "https://www.amazon.com.tr/gp/buy/payselect/handlers/display.html?_from=cheetah")) {
+        if (!Objects.equals(getCurrentURL(), "https://www.amazon.com.tr/gp/buy/payselect/handlers/display.html?_from=cheetah")) {
             cp.clickFunction(cp.continueToPaymentStp);
             wait.until(driver -> driver.findElement(By.xpath("//a[text()='Kredi kartı veya banka kartı ekleyin']")).getText().contains("banka kartı"));
             cp.waitUntilElementToBeClickable(cp.amazonLogo);
@@ -100,7 +100,6 @@ public class CheckoutProcessSteps {
             cp.jsClick(cp.stayPage);
             cp.clickFunction(cp.addCreditOrBankCard);
         }
-
     }
 
     @When("The user enters card details")

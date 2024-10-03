@@ -9,10 +9,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.awt.*;
+import java.io.File;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
-import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
@@ -94,7 +94,7 @@ public class ReusableMethods {
      *                This element should be visible on the page.
      * @return void This function does not return any value.
      */
-    public static void scrollToElement(WebElement element) {
+    public void scrollToElement(WebElement element) {
         JavascriptExecutor js = (JavascriptExecutor) GWD.getDriver();
         js.executeScript("arguments[0].scrollIntoView();", element);
     }
@@ -105,7 +105,7 @@ public class ReusableMethods {
      * The function does not take any parameters and does not return any value.
      * It executes a JavaScript snippet that scrolls the page to the top.
      */
-    public static void scrollToHome() {
+    public void scrollToHome() {
         JavascriptExecutor js = (JavascriptExecutor) GWD.getDriver();
         js.executeScript("window.scrollTo(0,-document.body.scrollHeight)");
     }
@@ -116,7 +116,7 @@ public class ReusableMethods {
      * The function does not take any parameters and does not return any value.
      * It executes a JavaScript snippet that scrolls the page to the bottom of the document body.
      */
-    public static void scrollToEnd() {
+    public void scrollToEnd() {
         JavascriptExecutor js = (JavascriptExecutor) GWD.getDriver();
         js.executeScript("window.scrollTo(0,document.body.scrollHeight)");
     }
@@ -159,7 +159,7 @@ public class ReusableMethods {
      * @param text    The text value to be set for the 'value' attribute of the given web element.
      * @return void This function does not return any value.
      */
-    public static void sendAttributeJS(WebElement element, String text) {
+    public void sendAttributeJS(WebElement element, String text) {
         JavascriptExecutor js = (JavascriptExecutor) GWD.getDriver();
         js.executeScript("arguments[0].setAttribute('value','" + text + "')", element);
     }
@@ -173,7 +173,7 @@ public class ReusableMethods {
      * @throws NullPointerException If the specified ID or attribute name is null.
      * @throws ClassCastException   If the retrieved value is not a string.
      */
-    public static void getValueByJS(String id, String attributeName) {
+    public void getValueByJS(String id, String attributeName) {
         JavascriptExecutor js = (JavascriptExecutor) GWD.getDriver();
         String attributeValue = (String) js.executeScript("return document.getElementById('" + id + "')." + attributeName);
         System.out.println("Attribute Value: " + attributeValue);
@@ -186,7 +186,7 @@ public class ReusableMethods {
      *                This element should be visible.
      * @return void This function does not return any value.
      */
-    public static void clearByJs(WebElement element) {
+    public void clearByJs(WebElement element) {
         JavascriptExecutor jse = (JavascriptExecutor) GWD.getDriver();
         jse.executeScript("arguments[0].value = '';", element);
     }
@@ -199,7 +199,7 @@ public class ReusableMethods {
      *                This element should be visible on the page.
      * @return void This function does not return any value.
      */
-    public static void highlightElement(WebElement element) {
+    public void highlightElement(WebElement element) {
         JavascriptExecutor js = (JavascriptExecutor) GWD.getDriver();
         js.executeScript("arguments[0].style.border='3px solid red'", element);
     }
@@ -229,7 +229,7 @@ public class ReusableMethods {
      * @throws AssertionError If the element's text does not contain the specified value.
      *                        The error message will include the text not found and the actual element text.
      */
-    public static void checkTextContains(WebElement element, String text) {
+    public void checkTextContains(WebElement element, String text) {
         WebDriverWait wait = new WebDriverWait(GWD.getDriver(), Duration.ofSeconds(ConfigReader.getIntProperty("explicit.wait")));
         WebElement elementName = wait.until(ExpectedConditions.visibilityOf(element));
         if (elementName.getText().trim().toLowerCase().contains(text.trim().toLowerCase())) {
@@ -338,7 +338,7 @@ public class ReusableMethods {
      * @param quantity The number of times the Tab key should be pressed.
      * @throws RuntimeException If an AWTException occurs while creating a Robot object.
      */
-    public static void tabKeyMultiplePress(int quantity) {
+    public void tabKeyMultiplePress(int quantity) {
         Robot robot;
         try {
             robot = new Robot();
@@ -359,7 +359,7 @@ public class ReusableMethods {
      * @param quantity The number of times the Enter key should be pressed.
      * @throws RuntimeException If an AWTException occurs while creating a Robot object.
      */
-    public static void enterKeyMultiplePress(int quantity) {
+    public void enterKeyMultiplePress(int quantity) {
         Robot robot;
         try {
             robot = new Robot();
@@ -380,7 +380,7 @@ public class ReusableMethods {
      * @param quantity The number of times the left mouse button should be pressed.
      * @throws RuntimeException If an AWTException occurs while creating a Robot object.
      */
-    public static void leftClickMultiplePress(int quantity) {
+    public void leftClickMultiplePress(int quantity) {
         Robot robot;
         try {
             robot = new Robot();
@@ -396,13 +396,27 @@ public class ReusableMethods {
         }
     }
 
+    public void downKeyMultiplePress(int quantity) {
+        Robot robot;
+        try {
+            robot = new Robot();
+        } catch (AWTException e) {
+            throw new RuntimeException(e);
+        }
+        for (int i = 0; i < quantity; i++) {
+            robot.delay(500);
+            robot.keyPress(KeyEvent.VK_DOWN);
+            robot.keyRelease(KeyEvent.VK_DOWN);
+        }
+    }
+
     /**
      * Generates a random integer within the specified range.
      *
      * @param range The upper limit (exclusive) of the range.
      * @return An integer randomly selected within the range [0, range).
      */
-    public static int randomGenerator(int range) {
+    public int randomGenerator(int range) {
         return (int) (Math.random() * range);
     }
 
@@ -432,7 +446,7 @@ public class ReusableMethods {
      * @param title The expected title of the page.
      * @throws TimeoutException If the expected title does not match the actual title within the specified wait time.
      */
-    public static void waitForPageTitle(String title) {
+    public void waitForPageTitle(String title) {
         WebDriverWait wait = new WebDriverWait(GWD.getDriver(), Duration.ofSeconds(ConfigReader.getIntProperty("explicit.wait")));
         wait.until(ExpectedConditions.titleIs(title));
     }
@@ -445,7 +459,7 @@ public class ReusableMethods {
      * @return A string representing the value of the specified attribute.
      * If the attribute does not exist or is not set, the method returns null.
      */
-    public static String getAttribute(WebElement element, String attribute) {
+    public String getAttribute(WebElement element, String attribute) {
         return element.getAttribute(attribute);
     }
 
@@ -455,7 +469,7 @@ public class ReusableMethods {
      *
      * @return void This function does not return any value.
      */
-    public static void switchToParentFrame() {
+    public void switchToParentFrame() {
         GWD.getDriver().switchTo().parentFrame();
     }
 
@@ -497,7 +511,7 @@ public class ReusableMethods {
      *
      * @return void This function does not return any value.
      */
-    public static void switchToDefaultContent() {
+    public void switchToDefaultContent() {
         GWD.getDriver().switchTo().defaultContent();
     }
 
@@ -506,7 +520,7 @@ public class ReusableMethods {
      *
      * @return void This function does not return any value.
      */
-    public static void clearCookies() {
+    public void clearCookies() {
         GWD.getDriver().manage().deleteAllCookies();
     }
 
@@ -516,7 +530,7 @@ public class ReusableMethods {
      *
      * @return void This function does not return any value.
      */
-    public static void acceptAllCookies() {
+    public void acceptAllCookies() {
         java.util.List<WebElement> acceptButtons = GWD.getDriver().findElements(By.xpath("//button[contains(text(),'Accept')]"));
         if (!acceptButtons.isEmpty()) {
             acceptButtons.get(0).click();
@@ -531,7 +545,7 @@ public class ReusableMethods {
      * @return A boolean indicating whether the list contains the specified string.
      * The function returns true if the list contains the string, and false otherwise.
      */
-    public static boolean listContainsString(List<WebElement> list, String search) {
+    public boolean listContainsString(List<WebElement> list, String search) {
         boolean isFound = false;
         for (WebElement e : list) {
             if (e.getText().equalsIgnoreCase(search))
@@ -550,7 +564,7 @@ public class ReusableMethods {
      * and false otherwise.
      * @throws IndexOutOfBoundsException If the lists are of different sizes.
      */
-    public static boolean compareLists(List<WebElement> list1, List<String> list2) {
+    public boolean compareLists(List<WebElement> list1, List<String> list2) {
         // Check if the lists are of equal size.
         if (list1.size() != list2.size()) {
             return false;
@@ -571,7 +585,7 @@ public class ReusableMethods {
      * @param sn The number of seconds to wait.
      * @throws RuntimeException If the thread is interrupted while waiting.
      */
-    public static void wait(int sn) {
+    public void wait(int sn) {
         try {
             Thread.sleep(sn * 1000);
         } catch (InterruptedException e) {
@@ -586,7 +600,7 @@ public class ReusableMethods {
      *                 The file will be saved in the "screenshots" directory.
      * @throws IOException If an error occurs while copying the screenshot file.
      */
-    public static void captureScreenshot(String fileName) {
+    public void captureScreenshot(String fileName) {
         File screenshot = ((TakesScreenshot) GWD.getDriver()).getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(screenshot, new File("screenshots/" + fileName + ".png"));
@@ -602,7 +616,7 @@ public class ReusableMethods {
      * @param value        The value of the radio button to be selected.
      * @return void This function does not return any value.
      */
-    public static void selectRadioButtonByValue(java.util.List<WebElement> radioButtons, String value) {
+    public void selectRadioButtonByValue(java.util.List<WebElement> radioButtons, String value) {
         for (WebElement radioButton : radioButtons) {
             if (radioButton.getAttribute("value").equalsIgnoreCase(value)) {
                 if (!radioButton.isSelected()) {
@@ -619,7 +633,7 @@ public class ReusableMethods {
      * @param timeout The maximum time to wait for the alert to be present.
      * @return void This function does not return any value.
      */
-    public static void alertAccept(int timeout) {
+    public void alertAccept(int timeout) {
         WebDriverWait wait = new WebDriverWait(GWD.getDriver(), Duration.ofSeconds(timeout));
         wait.until(ExpectedConditions.alertIsPresent());
         GWD.getDriver().switchTo().alert().accept();
@@ -630,7 +644,7 @@ public class ReusableMethods {
      *
      * @return void This function does not return any value.
      */
-    public static void alertDismiss() {
+    public void alertDismiss() {
         GWD.getDriver().switchTo().alert().dismiss();
     }
 
@@ -640,7 +654,7 @@ public class ReusableMethods {
      * @param timeout The maximum time to wait for the alert to be present.
      * @return void This function does not return any value.
      */
-    public static void alertWait(int timeout) {
+    public void alertWait(int timeout) {
         WebDriverWait wait = new WebDriverWait(GWD.getDriver(), Duration.ofSeconds(timeout));
         wait.until(ExpectedConditions.alertIsPresent());
     }
@@ -651,7 +665,7 @@ public class ReusableMethods {
      * @return A string containing the text from the alert box.
      * The method returns an empty string if no alert box is present.
      */
-    public static void alertText() {
+    public void alertText() {
         GWD.getDriver().switchTo().alert().getText();
     }
 
@@ -662,7 +676,7 @@ public class ReusableMethods {
      *             This text will be displayed in the alert box when it is accepted.
      * @return void This function does not return any value.
      */
-    public static void alertPromptBox(String text) {
+    public void alertPromptBox(String text) {
         GWD.getDriver().switchTo().alert().sendKeys(text);
     }
 
@@ -671,7 +685,7 @@ public class ReusableMethods {
      *
      * @return void This function does not return any value.
      */
-    public static void refreshPage() {
+    public void refreshPage() {
         GWD.getDriver().navigate().refresh();
     }
 
@@ -681,7 +695,7 @@ public class ReusableMethods {
      * @return A string representing the current URL of the web page.
      * The returned URL is the one that the WebDriver is currently viewing.
      */
-    public static String getCurrentURL() {
+    public String getCurrentURL() {
         return GWD.getDriver().getCurrentUrl();
     }
 
@@ -691,7 +705,7 @@ public class ReusableMethods {
      * @param num The index of the window to switch to. The index is zero-based.
      * @return void This function does not return any value.
      */
-    public static void switchToWindow(int num) {
+    public void switchToWindow(int num) {
         List<String> windowHandlesAll = new ArrayList<String>(GWD.getDriver().getWindowHandles());
         GWD.getDriver().switchTo().window(windowHandlesAll.get(num));
     }
@@ -702,7 +716,7 @@ public class ReusableMethods {
      * @param num The index of the window to switch to. The index is zero-based.
      * @return void This function does not return any value.
      */
-    public static void switchToWindow2(int num) {
+    public void switchToWindow2(int num) {
         GWD.getDriver().switchTo().window(GWD.getDriver().getWindowHandles().toArray()[num].toString());
     }
 
@@ -713,7 +727,7 @@ public class ReusableMethods {
      * @return void This function does not return any value.
      * @throws TimeoutException If the number of open windows does not match the expected number within the specified wait time.
      */
-    public static void waitForNumberOfWindowsToEqual(int numberOfWindows) {
+    public void waitForNumberOfWindowsToEqual(int numberOfWindows) {
         WebDriverWait wait = new WebDriverWait(GWD.getDriver(), Duration.ofSeconds(ConfigReader.getIntProperty("explicit.wait")));
         wait.until(ExpectedConditions.numberOfWindowsToBe(numberOfWindows));
     }

@@ -12,7 +12,7 @@ import pages.AddAdressPOM;
 import utilities.GWD;
 import utilities.ReusableMethods;
 
-public class AddAddressSteps {
+public class AddAddressSteps extends ReusableMethods {
 
     AddAdressPOM aap = new AddAdressPOM();
     public WebDriverWait wait;
@@ -25,35 +25,34 @@ public class AddAddressSteps {
 
     @When("The user presses the address button on the opened page and clicks on add address")
     public void theUserPressesTheAddressButtonOnTheOpenedPageAndClicksOnAddAddress() {
-        aap.jsClick(aap.addAddressBtn);
-        aap.jsClick(aap.newAddAddressBtn);
+        jsClick(aap.addAddressBtn);
+        jsClick(aap.newAddAddressBtn);
     }
 
     @Then("User enters address details")
     public void userEntersAddressDetails() {
 
-        aap.sendKeysFunction(aap.fullNameTxt, "Ahmet Kaya");
-        aap.sendKeysFunction(aap.phoneTxt, "5315865656");
-        aap.sendKeysFunction(aap.addressTxt, "dsadsa");
-        aap.sendKeysFunction(aap.cityTxt, "İs");
-        ReusableMethods.wait(2);
-        ReusableMethods.downKeyMultiplePress(3);
-        ReusableMethods.enterKeyMultiplePress(1);
-        aap.sendKeysFunction(aap.districtTxt, "ü");
-        ReusableMethods.wait(2);
-        ReusableMethods.downKeyMultiplePress(3);
-        ReusableMethods.enterKeyMultiplePress(1);
-        aap.sendKeysFunction(aap.neighbourhoodTxt, "y");
-        ReusableMethods.wait(2);
-        ReusableMethods.downKeyMultiplePress(2);
-        ReusableMethods.enterKeyMultiplePress(1);
-        ReusableMethods.wait(2);
-        aap.clickFunction(aap.saveBtn);
-
+        sendKeysFunction(aap.fullNameTxt, "Ahmet Kaya");
+        sendKeysFunction(aap.phoneTxt, "5315865656");
+        sendKeysFunction(aap.addressTxt, "dsadsa");
+        sendKeysFunction(aap.cityTxt, "İs");
+        wait(2);
+        downKeyMultiplePress(3);
+        enterKeyMultiplePress(1);
+        sendKeysFunction(aap.districtTxt, "ü");
+        wait(2);
+        downKeyMultiplePress(3);
+        enterKeyMultiplePress(1);
+        sendKeysFunction(aap.neighbourhoodTxt, "y");
+        wait(2);
+        downKeyMultiplePress(2);
+        enterKeyMultiplePress(1);
+        wait(2);
+        clickFunction(aap.saveBtn);
     }
 
     @And("The user sees the address saved text on the screen")
     public void theUserSeesTheAddressSavedTextOnTheScreen() {
-        aap.verifyContainsText(aap.verifyAddressTxt, "Adres kaydedildi");
+        verifyContainsText(aap.verifyAddressTxt, "Adres kaydedildi");
     }
 }
